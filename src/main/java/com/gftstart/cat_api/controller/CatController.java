@@ -50,4 +50,8 @@ public class CatController {
     }
 
     // puxar imagem aqui ??
+    @GetMapping("/image")
+    public String getBreedImage(@RequestParam("breed") String breed){
+        return catService.getBreedImage(breed);
+    }
 }

@@ -77,5 +77,26 @@ public class CatServiceImpl implements CatService {
                 .collect(Collectors.toList());
     }
 
-    // logica puxar imagem da api
+    public String getBreedImage(String breed) {
+        String url = API_URL + "/breeds";
+        String IMG_BASE_URL = "https://cdn2.thecatapi.com/images/";
+
+        ResponseEntity<List<CatDTO>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<CatDTO>>() {
+                }
+        );
+
+        String imgReferenceId = response.getBody().stream()
+                .filter(cat -> breed.equalsIgnoreCase(cat.getBreed()))
+                .map(CatDTO::getReferenceImage)
+                .findFirst()
+                .orElse(null);
+
+        String imgUrl = IMG_BASE_URL + imgReferenceId + ".jpg";
+
+        return imgUrl;
+    }
 }

@@ -18,4 +18,5 @@ public interface CatService {
     List<String> getAllBreeds();
 
     // puxar imagem api ??
+    String getBreedImage(String breed);
 }
