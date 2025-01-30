@@ -15,5 +15,7 @@ public interface CatService {
 
     String deleteCat(Long id);
 
-    // servicos api aqui ??
+    List<String> getAllBreeds();
+
+    // puxar imagem api ??
 }

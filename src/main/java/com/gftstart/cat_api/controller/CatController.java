@@ -43,5 +43,11 @@ public class CatController {
         return catService.deleteCat(id);
     }
 
-    // integracao com api ??
+    @ResponseBody
+    @GetMapping("/breeds")
+    public List<String> getAllBreeds() {
+        return catService.getAllBreeds();
+    }
+
+    // puxar imagem aqui ??
 }

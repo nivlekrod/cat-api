@@ -1,16 +1,21 @@
 package com.gftstart.cat_api.service.impl;
 
+import com.gftstart.cat_api.dto.CatDTO;
 import com.gftstart.cat_api.model.Cat;
 import com.gftstart.cat_api.repository.CatRepository;
 import com.gftstart.cat_api.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CatServiceImpl implements CatService {
@@ -19,6 +24,9 @@ public class CatServiceImpl implements CatService {
 
     @Value("${thecatapi.apikey}")
     private String apiKey;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Autowired
     private CatRepository catRepository;
@@ -51,6 +59,23 @@ public class CatServiceImpl implements CatService {
     public String deleteCat(Long id) {
         catRepository.deleteById(id);
         return "Deletado";
-
     }
+
+    public List<String> getAllBreeds() {
+        String url = API_URL + "/breeds";
+
+        ResponseEntity<List<CatDTO>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<CatDTO>>() {
+                }
+        );
+
+        return response.getBody().stream()
+                .map(CatDTO::getBreed)
+                .collect(Collectors.toList());
+    }
+
+    // logica puxar imagem da api
 }
