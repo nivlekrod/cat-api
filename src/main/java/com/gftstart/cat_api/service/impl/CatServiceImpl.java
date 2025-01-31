@@ -33,6 +33,8 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public Cat createCat(Cat cat) {
+        String imgUrl = getBreedImage(cat.getBreed());
+        cat.setReferenceImage(imgUrl);
         catRepository.save(cat);
         return cat;
     }
