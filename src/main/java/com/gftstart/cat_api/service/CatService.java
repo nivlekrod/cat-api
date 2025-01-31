@@ -11,12 +11,13 @@ public interface CatService {
 
     List<Cat> getAllCats();
 
+    List<Cat> searchCatsByBreed(String breed);
+
     Cat updateCat(Long id, Cat cat);
 
     String deleteCat(Long id);
 
     List<String> getAllBreeds();
 
-    // puxar imagem api ??
     String getBreedImage(String breed);
 }

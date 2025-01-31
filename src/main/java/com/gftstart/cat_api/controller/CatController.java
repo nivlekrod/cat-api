@@ -28,6 +28,11 @@ public class CatController {
         return catService.getAllCats();
     }
 
+    @GetMapping("/cats/filter")
+    public List<Cat> searchCatsByBreed(@RequestParam String breed) {
+        return catService.searchCatsByBreed(breed);
+    }
+
     @PostMapping("/cats")
     public Cat createCat(@RequestBody Cat cat) {
         return catService.createCat(cat);
@@ -49,7 +54,6 @@ public class CatController {
         return catService.getAllBreeds();
     }
 
-    // puxar imagem aqui ??
     @GetMapping("/image")
     public String getBreedImage(@RequestParam("breed") String breed){
         return catService.getBreedImage(breed);

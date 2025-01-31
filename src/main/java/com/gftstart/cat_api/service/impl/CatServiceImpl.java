@@ -49,6 +49,12 @@ public class CatServiceImpl implements CatService {
     }
 
     @Override
+    public List<Cat> searchCatsByBreed(String breed) {
+        List<Cat> cats = catRepository.findByBreedIgnoreCase(breed);
+        return cats;
+    }
+
+    @Override
     public Cat updateCat(Long id, Cat cat) {
         cat.setId(id);
         catRepository.save(cat);
