@@ -108,7 +108,11 @@ public class CatController {
     }
 
     @Operation(summary = "Obtém a imagem de uma raça", description = "Retorna a URL da imagem correspondente à raça informada.")
-    @ApiResponse(responseCode = "200", description = "Imagem recuperada com sucesso")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Imagem recuperada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Imagem da raça não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro ao acessar API externa")
+    })
     @GetMapping("/image")
     public ResponseEntity<String> getBreedImage(@RequestParam("breed") String breed) {
         String imageUrl = catService.getBreedImage(breed);
