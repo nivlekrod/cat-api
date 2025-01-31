@@ -167,7 +167,11 @@ public class CatServiceImpl implements CatService {
                     .filter(cat -> breed.equalsIgnoreCase(cat.getBreed()))
                     .map(CatDTO::getReferenceImage)
                     .findFirst()
-                    .orElseThrow(() -> new CatNotFoundException("Imagem da raça não encontrada"));
+                    .orElse("Imagem da raça não encontrada");
+
+            if (imgReferenceId.equals("Imagem da raça não encontrada")) {
+                return "Imagem da raça não encontrada";
+            }
 
             return IMG_BASE_URL + imgReferenceId + ".jpg";
         } catch (HttpClientErrorException e) {
