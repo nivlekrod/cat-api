@@ -15,7 +15,7 @@ public interface CatService {
 
     Cat updateCat(Long id, Cat cat);
 
-    String deleteCat(Long id);
+    void deleteCat(Long id);
 
     List<String> getAllBreeds();
 

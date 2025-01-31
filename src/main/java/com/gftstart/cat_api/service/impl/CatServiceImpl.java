@@ -73,7 +73,6 @@ public class CatServiceImpl implements CatService {
         }
     }
 
-    /// MODIFICAR ALGO? TRYCATCH?/
     @Override
     public List<Cat> searchCatsByBreed(String breed) {
         try {
@@ -108,7 +107,7 @@ public class CatServiceImpl implements CatService {
     }
 
     @Override
-    public String deleteCat(Long id) {
+    public void deleteCat(Long id) {
         try {
             if (!catRepository.existsById(id)) {
                 throw new CatNotFoundException("Não foi possível deletar: Gato não encontrado.");
@@ -116,7 +115,6 @@ public class CatServiceImpl implements CatService {
 
             catRepository.deleteById(id);
 
-            return "Gato deletado com sucesso.";
         } catch (DataAccessException e) {
             throw new CatDataAccessException("Erro ao acessar o banco de dados" + e.getMessage(), e);
         }
